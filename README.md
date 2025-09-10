@@ -83,11 +83,16 @@ Structure de UserAssist
 - Sous-clés GUID
 
      La clé contient des sous-clés avec des noms GUID (exemple : {CEBFF5CD-ACE2-4F4F-9178-9926F41749EA})
+  
      Chaque GUID correspond à un type de suivi (par exemple : programmes lancés, fichiers ouverts via Explorer, etc.).
 
 - Sous-clé Count
      À l’intérieur de chaque GUID, il y a une sous-clé Count.
+  
      Cette sous-clé contient des valeurs qui indiquent :
+  
         Le nom du programme/fichier (encodé en ROT13)
+  
         Nombre de fois qu’il a été exécuté
+  
         Dernière date d’exécution (timestamp)
