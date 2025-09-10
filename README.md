@@ -69,3 +69,25 @@ C:\Windows\system32\VBoxTray.exe → chemin complet du programme exécuté autom
 Dans ton exemple, le seul programme trouvé est VBoxTray.exe.
 
 Cela constitue une preuve d’exécution (Evidence of Execution) : on sait que ce programme a été lancé automatiquement par Windows.
+
+## UserAssist key
+```bash
+HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist
+```
+
+Chaque utilisateur a sa propre clé UserAssist dans son fichier NTUSER.DAT.
+Cette clé enregistre les programmes et fichiers que l’utilisateur a lancés via l’interface graphique (clic sur le menu Démarrer, bureau, explorateur de fichiers, etc.).
+
+Structure de UserAssist
+
+- Sous-clés GUID
+
+     La clé contient des sous-clés avec des noms GUID (exemple : {CEBFF5CD-ACE2-4F4F-9178-9926F41749EA})
+     Chaque GUID correspond à un type de suivi (par exemple : programmes lancés, fichiers ouverts via Explorer, etc.).
+
+- Sous-clé Count
+     À l’intérieur de chaque GUID, il y a une sous-clé Count.
+     Cette sous-clé contient des valeurs qui indiquent :
+        Le nom du programme/fichier (encodé en ROT13)
+        Nombre de fois qu’il a été exécuté
+        Dernière date d’exécution (timestamp)
