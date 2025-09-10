@@ -77,7 +77,10 @@ HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist
 
 Chaque utilisateur a sa propre clé UserAssist dans son fichier NTUSER.DAT.
 Cette clé enregistre les programmes et fichiers que l’utilisateur a lancés via l’interface graphique (clic sur le menu Démarrer, bureau, explorateur de fichiers, etc.).
-
+    - Double-clicking an app icon on the desktop
+    - Opening a program from the Start menu
+    - Launching from a file association (e.g., double-clicking a `.docx` opens Word)
+    
 Structure de UserAssist
 
 - Sous-clés GUID
@@ -96,3 +99,44 @@ Structure de UserAssist
         Nombre de fois qu’il a été exécuté
   
         Dernière date d’exécution (timestamp)
+
+
+<img width="498" height="196" alt="{7DAEB3FC-F536-4821-89D4-9ABA6B8D26CA}" src="https://github.com/user-attachments/assets/f3cb12a5-ea0b-4968-ae63-a6bbd006c4b6" />
+
+       Subkeys:
+           (S) {CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}
+           (S) {F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}
+           
+Ce sont les GUIDs, chacun correspondant à un type de suivi :
+
+Un GUID peut suivre les programmes exécutés via l’interface graphique.
+
+Un autre peut suivre les fichiers ouverts via Explorer, etc.
+
+        Values:
+
+Ici, il n’y a pas de valeurs directes à ce niveau.
+
+Les valeurs sont dans les sous-clés {GUID}\Count.
+
+Ces valeurs contiennent :
+
+     - Le nom du programme/fichier exécuté (encodé en ROT13).
+
+     - Le nombre d’exécutions.
+
+     - La date de dernière exécution.
+
+Interprétation
+
+Vous venez de lister la clé UserAssist principale.
+
+Pour voir réellement les programmes que l’utilisateur a exécutés, vous devez maintenant :
+
+    printkey sur un GUID spécifique, puis la sous-clé Count
+
+Exemple de chemin complet pour explorer les exécutions :
+
+    Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\Count
+
+C’est là que se trouvent les valeurs ROT13 des programmes lancés avec leurs compteurs.
