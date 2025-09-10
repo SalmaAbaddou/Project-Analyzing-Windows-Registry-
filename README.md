@@ -1,1 +1,1 @@
-# Project-Analyzing-Windows-Registry-
+# Project: Analyzing Windows Registry
