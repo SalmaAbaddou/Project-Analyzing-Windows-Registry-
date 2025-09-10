@@ -61,11 +61,8 @@ Donnée de la valeur → chemin complet de l’exécutable à lancer
 Le plugin `printkey` de Volatility permet d’extraire et d’afficher **le contenu d’une clé spécifique du registre Windows** depuis un dump mémoire.
 
 Values → liste des valeurs dans la clé.
-
 REG_SZ → type de donnée : chaîne de caractères.
-
 VBoxTray → nom de la valeur (ici c’est le programme configuré pour démarrage automatique).
-
 (S) → valeur stable.
 
 C:\Windows\system32\VBoxTray.exe → chemin complet du programme exécuté automatiquement au démarrage (dans ce cas, l’outil VirtualBox Guest Additions Tray).
