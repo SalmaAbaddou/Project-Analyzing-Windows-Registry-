@@ -57,6 +57,7 @@ Nom de la valeur → nom du programme ou du service
 Donnée de la valeur → chemin complet de l’exécutable à lancer
 
 <img width="502" height="192" alt="{B2248F71-DAB3-40F9-8362-82A8AFE42E99}" src="https://github.com/user-attachments/assets/930b3489-92ce-45bf-ba19-734bfc20f121" />
+
 Le plugin `printkey` de Volatility permet d’extraire et d’afficher **le contenu d’une clé spécifique du registre Windows** depuis un dump mémoire.
 
 Values → liste des valeurs dans la clé.
