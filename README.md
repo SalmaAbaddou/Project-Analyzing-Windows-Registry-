@@ -77,66 +77,23 @@ HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist
 
 Chaque utilisateur a sa propre clé UserAssist dans son fichier NTUSER.DAT.
 Cette clé enregistre les programmes et fichiers que l’utilisateur a lancés via l’interface graphique (clic sur le menu Démarrer, bureau, explorateur de fichiers, etc.).
+
     - Double-clicking an app icon on the desktop
-    - Opening a program from the Start menu
-    - Launching from a file association (e.g., double-clicking a `.docx` opens Word)
     
-Structure de UserAssist
+    - Opening a program from the Start menu
+    
+    - Launching from a file association (e.g., double-clicking a `.docx` opens Word)
 
-- Sous-clés GUID
+Ce que le plugin userassist fait
 
-     La clé contient des sous-clés avec des noms GUID (exemple : {CEBFF5CD-ACE2-4F4F-9178-9926F41749EA})
-  
-     Chaque GUID correspond à un type de suivi (par exemple : programmes lancés, fichiers ouverts via Explorer, etc.).
+Le plugin userassist de Volatility va extraire et décoder ces entrées depuis le dump mémoire.
 
-- Sous-clé Count
-     À l’intérieur de chaque GUID, il y a une sous-clé Count.
-  
-     Cette sous-clé contient des valeurs qui indiquent :
-  
-        Le nom du programme/fichier (encodé en ROT13)
-  
-        Nombre de fois qu’il a été exécuté
-  
-        Dernière date d’exécution (timestamp)
+Les données dans UserAssist sont encodées en ROT13, et Volatility se charge de les décoder automatiquement.
 
+Le résultat montre :
 
-<img width="498" height="196" alt="{7DAEB3FC-F536-4821-89D4-9ABA6B8D26CA}" src="https://github.com/user-attachments/assets/f3cb12a5-ea0b-4968-ae63-a6bbd006c4b6" />
+     Nom du programme / chemin (ex: calc.exe, notepad.exe)
 
-       Subkeys:
-           (S) {CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}
-           (S) {F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}
-           
-Ce sont les GUIDs, chacun correspondant à un type de suivi :
-
-Un GUID peut suivre les programmes exécutés via l’interface graphique.
-
-Un autre peut suivre les fichiers ouverts via Explorer, etc.
-
-        Values:
-
-Ici, il n’y a pas de valeurs directes à ce niveau.
-
-Les valeurs sont dans les sous-clés {GUID}\Count.
-
-Ces valeurs contiennent :
-
-     - Le nom du programme/fichier exécuté (encodé en ROT13).
-
-     - Le nombre d’exécutions.
-
-     - La date de dernière exécution.
-
-Interprétation
-
-Vous venez de lister la clé UserAssist principale.
-
-Pour voir réellement les programmes que l’utilisateur a exécutés, vous devez maintenant :
-
-    printkey sur un GUID spécifique, puis la sous-clé Count
-
-Exemple de chemin complet pour explorer les exécutions :
-
-    Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\Count
-
-C’est là que se trouvent les valeurs ROT13 des programmes lancés avec leurs compteurs.
+     Nombre d’exécutions (Run count)
+     
+     Dernière exécution (Last executed time)
