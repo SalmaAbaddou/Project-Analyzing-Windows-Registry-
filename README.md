@@ -1,5 +1,5 @@
 # Project: Analyzing Windows Registry
-# 🔍 Windows Memory Forensics – Analyse du Registry
+#  Windows Memory Forensics – Analyse du Registry
 
 Ce projet montre comment, en se basant sur un **Windows Memory Dump**, on peut **extraire les hives du registre Windows** et les analyser pour comprendre comment explorer et investiguer le **Windows Registry** lors d’une enquête forensic.
 
@@ -90,10 +90,46 @@ Le plugin userassist de Volatility va extraire et décoder ces entrées depuis l
 
 Les données dans UserAssist sont encodées en ROT13, et Volatility se charge de les décoder automatiquement.
 
-Le résultat montre :
+- Le résultat montre :
 
-     Nom du programme / chemin (ex: calc.exe, notepad.exe)
+       Nom du programme / chemin (ex: calc.exe, notepad.exe)
 
-     Nombre d’exécutions (Run count)
+       Nombre d’exécutions (Run count)
      
-     Dernière exécution (Last executed time)
+       Dernière exécution (Last executed time)
+
+<img width="585" height="369" alt="{D215E29F-2643-4E2D-B59A-9BB29451D419}" src="https://github.com/user-attachments/assets/c82436bc-9e6e-4cbf-86f9-0b7f309c60cf" />
+
+- Interprétation forensic
+
+Ces informations donnent une preuve directe de l’exécution de programmes par l’utilisateur.
+
+Utile pour :
+
+     Voir quels programmes ont été lancés et combien de fois.
+
+     Identifier des programmes suspects utilisés par l’attaquant.
+
+     Reconstituer une timeline d’exécution sur le poste analysé.
+
+# ShimCache
+
+- Ce que ShimCache fait
+
+ShimCache est un cache de compatibilité des applications.
+
+Windows enregistre dans ce cache les exécutables qui existent sur le système, avec certaines métadonnées (chemin, taille, date de modification).
+
+- Ce que le plugin shimcache fait
+
+Le plugin Volatility va extraire et afficher la liste des exécutables enregistrés dans le cache.
+
+Il fournit pour chaque exécutable :
+
+     Nom et chemin complet (ex: C:\Windows\System32\notepad.exe)
+
+     Dernière date/heure de modification ou d’accès (parfois dernière exécution)
+
+     Utile car même si un programme a été supprimé ou déplacé, il peut toujours apparaître dans le ShimCache.
+
+<img width="567" height="230" alt="{45419AD5-8425-48B4-B20D-64872931D31D}" src="https://github.com/user-attachments/assets/d5f2e0e7-4a4c-47e5-b400-782810f3feed" />
