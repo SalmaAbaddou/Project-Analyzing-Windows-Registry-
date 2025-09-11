@@ -112,7 +112,7 @@ Utile pour :
 
      Reconstituer une timeline d’exécution sur le poste analysé.
 
-# ShimCache
+## ShimCache
 
 - Ce que ShimCache fait
 
@@ -133,3 +133,23 @@ Il fournit pour chaque exécutable :
      Utile car même si un programme a été supprimé ou déplacé, il peut toujours apparaître dans le ShimCache.
 
 <img width="567" height="230" alt="{45419AD5-8425-48B4-B20D-64872931D31D}" src="https://github.com/user-attachments/assets/d5f2e0e7-4a4c-47e5-b400-782810f3feed" />
+
+# Tracking Recent User Activity
+
+Dans cette section, nous allons nous intéresser à la suivi des fichiers et dossiers récemment utilisés par l’utilisateur sur un système Windows.
+
+L’objectif est de retrouver des traces des fichiers et dossiers ouverts ou manipulés, afin de comprendre le comportement de l’utilisateur et reconstituer une timeline d’activité.
+
+Nous allons analyser plusieurs sources importantes :
+
+- Recent Files (RecentDocs) : fichiers récemment ouverts par l’utilisateur.
+
+- Microsoft Office Recent Files : documents Office récemment utilisés.
+
+- ShellBags : informations sur les dossiers ouverts dans l’Explorateur Windows, même après suppression.
+
+- Open/Save and LastVisited Dialog MRUs : listes de fichiers et dossiers récemment ouverts via les boîtes de dialogue “Ouvrir / Enregistrer sous” de Windows.
+
+Cette analyse permet de suivre l’activité récente, de retrouver des fichiers importants ou suspects et de reconstituer les habitudes de l’utilisateur.
+
+
